@@ -12,7 +12,7 @@ if __name__=="__main__":
     for year in range(2012,2021):
         missing[f'{year}']=[]
     for year in range(2012,2021):
-        dataset = gdal.Open(fr'F:\日度夜间灯光\结果\{year}\缺失_{year}_裁切.tif')
+        dataset = gdal.Open(fr'F:\rawmisssing\{year}.tif')
         data = dataset.ReadAsArray()
         c1 = data >= 0
         c2 = data <= 30
@@ -27,4 +27,4 @@ if __name__=="__main__":
         missing[f'{year}'].append(np.count_nonzero(c5)/np.count_nonzero(c1))
     data=pd.DataFrame(missing).T
     data.columns=['leq30','leq60','leq60','teg100']
-    data.to_excel('./result/原始数据缺失情况.xlsx')
+    data.to_excel('./result/rawmissing.xlsx')
